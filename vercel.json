@@ -10,7 +10,7 @@
         "use": "@vercel/static-build",
         "config": {
           "buildCommand": "cd client && npm install && npm run build",
-          "outputDirectory": "dist"
+          "outputDirectory": "client/dist"
         }
       }
     ],
@@ -18,7 +18,7 @@
       { "handle": "filesystem" },
       {
         "src": "/assets/(.*)",
-        "dest": "dist/assets/$1"
+        "dest": "client/dist/assets/$1"
       },
       {
         "src": "/api/(.*)",
@@ -26,7 +26,7 @@
       },
       {
         "src": "/(.*)",
-        "dest": "dist/index.html"
+        "dest": "client/dist/index.html"
       }
     ]
   }
