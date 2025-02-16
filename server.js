@@ -6,7 +6,12 @@ const https = require('https');
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(express.static('.'));
+// 在生产环境中提供前端构建文件
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/dist'));
+} else {
+  app.use(express.static('.'));
+}
 
 app.post('/api/chat', async (req, res) => {
     res.setHeader('Content-Type', 'text/event-stream');
