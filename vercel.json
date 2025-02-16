@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "buildCommand": "npm run build",
-  "outputDirectory": "client/dist",
   "builds": [
     {
       "src": "server.js",
       "use": "@vercel/node"
+    },
+    {
+      "src": "client/**",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
@@ -14,11 +16,16 @@
       "dest": "server.js"
     },
     {
-      "handle": "filesystem"
+      "src": "/assets/(.*)",
+      "dest": "/client/dist/assets/$1"
     },
     {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "src": "/(.+)",
+      "dest": "/client/dist/$1"
+    },
+    {
+      "src": "/",
+      "dest": "/client/dist/index.html"
     }
   ]
 }
